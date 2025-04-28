@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .header {
+            padding: 10px;
+            text-align: center;
+            color: rgb(9, 9, 9);
+            font-size: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>CROP RECOMMENDATION</h1>
+    </div>
+    <div class="container p-3">
+        <form id="cropForm" class="text-uppercase font-weight-bold">
+            <div class="form-group">
+                <label for="nitrogen">Nitrogen</label>
+                <input type="number" class="form-control" name="nitrogen" id="nitrogen" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="phosphorous">Phosphorous</label>
+                <input type="number" class="form-control" name="phosphorous" id="phosphorous" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="pottasium">Pottasium</label>
+                <input type="number" class="form-control" name="pottasium" id="pottasium" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="Temperature">Temperature</label>
+                <input type="number" class="form-control" name="Temperature" id="Temperature" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="Humidity">Humidity</label>
+                <input type="number" class="form-control" name="Humidity" id="Humidity" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="ph">Ph</label>
+                <input type="number" class="form-control" name="ph" id="ph" placeholder="Enter the value">
+            </div>
+
+            <div class="form-group">
+                <label for="rainfall">Rainfall</label>
+                <input type="number" class="form-control" name="rainfall" id="rainfall" placeholder="Enter the value">
+            </div>
+
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-success btn-lg" id="predictBtn">Predict</button>
+            </div>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <div class="container">
+        <footer class="py-3 my-4">
+            <hr>
+            <p class="text-center text-body-secondary">&copy; AgriSmart</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("predictBtn").addEventListener("click", function () {
+            var nitrogen = parseFloat(document.getElementById("nitrogen").value);
+            var phosphorous = parseFloat(document.getElementById("phosphorous").value);
+            var pottasium = parseFloat(document.getElementById("pottasium").value);
+            var temperature = parseFloat(document.getElementById("Temperature").value);
+            var humidity = parseFloat(document.getElementById("Humidity").value);
+            var ph = parseFloat(document.getElementById("ph").value);
+            var rainfall = parseFloat(document.getElementById("rainfall").value);
+
+            // Example logic to recommend a crop (this is just a sample logic)
+            var recommendedCrop = "";
+            var confidence = "Unknown";
+
+            // Simple rules for crop recommendation
+            if (temperature > 25 && rainfall > 100) {
+                recommendedCrop = "Rice";
+                confidence = "85%";
+            } else if (ph < 7 && nitrogen > 50) {
+                recommendedCrop = "Wheat";
+                confidence = "80%";
+            } else if (humidity > 60 && pottasium > 60) {
+                recommendedCrop = "Maize";
+                confidence = "75%";
+            } else {
+                recommendedCrop = "Soybean";
+                confidence = "70%";
+            }
+
+            // Display the result
+            document.getElementById("result").innerHTML = `
+                <strong>Recommended Crop:</strong> ${recommendedCrop} <br>
+                <strong>Confidence:</strong> ${confidence}
+            `;
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
